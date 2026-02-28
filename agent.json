@@ -1,0 +1,137 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -288,
+        -96
+      ],
+      "id": "7f496307-26c7-42d8-8378-1c1079f6a44e",
+      "name": "When chat message received",
+      "webhookId": "f7cc4e3e-7a2b-4ceb-a715-bcce83800d89"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You're helpful email agent"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -80,
+        -96
+      ],
+      "id": "26f6d5e1-85e2-4c2d-b627-437f0b85884b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        112
+      ],
+      "id": "2e385521-3e02-4b43-8029-46d68cc60759",
+      "name": "Memory"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://abubakarautomationabz.app.n8n.cloud/mcp/3e10bcb6-7ec9-4649-84eb-767acae42e93",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        112
+      ],
+      "id": "1cc1f754-67af-49ec-af7c-b96bc0ad18b0",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "3bc28082-bd61-4f22-890c-f7f2bc8bc469",
+      "name": "Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "hxUn0tae6RVJgLgK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "When chat message received": [
+      {
+        "action": "sendMessage",
+        "sessionId": "0ab84295-bad4-4353-9b68-74807ee59498",
+        "chatInput": "say him hi how's going"
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4140a59cfb9bde8a3ae72afbf42534a815825f2d0040fc46a5715846ce9f238"
+  }
+}
