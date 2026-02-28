@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "path": "3e10bcb6-7ec9-4649-84eb-767acae42e93"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -112
+      ],
+      "id": "d36bc0d4-d845-40eb-bf7a-926e7e741d4d",
+      "name": "MCP Server Trigger",
+      "webhookId": "3e10bcb6-7ec9-4649-84eb-767acae42e93"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        96
+      ],
+      "id": "058093b3-023f-4fb6-baaa-65c08be0acb2",
+      "name": "Send Email",
+      "webhookId": "37b61143-3f40-46e2-b789-5f094a87273b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9FkSeGA8AFBZI0m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        128,
+        112
+      ],
+      "id": "e7bade04-89b9-487d-ac99-ebbb21ef640e",
+      "name": "Get Emails",
+      "webhookId": "057e2bc8-401b-4013-81a9-2aaf3d18e6bf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9FkSeGA8AFBZI0m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        -64,
+        96
+      ],
+      "id": "e29b848a-e454-49a3-a9dc-6af94bd2a326",
+      "name": "Reply",
+      "webhookId": "557498b8-b169-49b0-8f7b-24725bf04dae",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9FkSeGA8AFBZI0m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        -240,
+        96
+      ],
+      "id": "9c4907f1-9e22-4f07-9282-c69947b7cd48",
+      "name": "Delete Email",
+      "webhookId": "d779305c-fb91-4065-be7b-56007bbd560f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9FkSeGA8AFBZI0m",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# MCP",
+        "height": 448,
+        "width": 864,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "6f710364-a29d-48b6-9025-57b6fdddbd93",
+      "name": "Sticky Note"
+    }
+  ],
+  "connections": {
+    "Send Email": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Emails": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Email": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4140a59cfb9bde8a3ae72afbf42534a815825f2d0040fc46a5715846ce9f238"
+  }
+}
